@@ -12,7 +12,11 @@ version = mod_version
 group = mod_group_id
 
 base {
-    archivesName = mod_id
+    archivesName = 'Enigmatic Legacy Keystone'
+}
+
+tasks.named('jar', Jar) {
+    archiveFileName = "Enigmatic Legacy Keystone ${mod_version}.jar"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
