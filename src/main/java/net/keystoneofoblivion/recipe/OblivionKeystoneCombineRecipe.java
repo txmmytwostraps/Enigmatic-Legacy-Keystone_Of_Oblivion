@@ -7,7 +7,7 @@ import net.keystoneofoblivion.ModRecipeSerializers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
@@ -42,11 +42,11 @@ public class OblivionKeystoneCombineRecipe extends CustomRecipe {
 
         if (keystone.isEmpty()) return false;
 
-        List<ResourceLocation> bound = keystone.getOrDefault(ModDataComponents.BOUND_ITEMS.get(), List.of());
+        List<Identifier> bound = keystone.getOrDefault(ModDataComponents.BOUND_ITEMS.get(), List.of());
 
         if (nonKeystone.size() == 1) {
             if (bound.size() >= Config.HARDCAP.get()) return false;
-            ResourceLocation otherId = BuiltInRegistries.ITEM.getKey(nonKeystone.get(0).getItem());
+            Identifier otherId = BuiltInRegistries.ITEM.getKey(nonKeystone.get(0).getItem());
             return !bound.contains(otherId);
         }
         return nonKeystone.isEmpty();
@@ -70,15 +70,15 @@ public class OblivionKeystoneCombineRecipe extends CustomRecipe {
 
         if (keystone.isEmpty()) return ItemStack.EMPTY;
 
-        List<ResourceLocation> bound = keystone.getOrDefault(ModDataComponents.BOUND_ITEMS.get(), List.of());
+        List<Identifier> bound = keystone.getOrDefault(ModDataComponents.BOUND_ITEMS.get(), List.of());
 
         if (nonKeystone.size() == 1) {
             if (bound.size() >= Config.HARDCAP.get()) return ItemStack.EMPTY;
-            ResourceLocation otherId = BuiltInRegistries.ITEM.getKey(nonKeystone.get(0).getItem());
+            Identifier otherId = BuiltInRegistries.ITEM.getKey(nonKeystone.get(0).getItem());
             if (bound.contains(otherId)) return ItemStack.EMPTY;
 
             ItemStack result = keystone.copy();
-            List<ResourceLocation> newList = new ArrayList<>(bound);
+            List<Identifier> newList = new ArrayList<>(bound);
             newList.add(otherId);
             result.set(ModDataComponents.BOUND_ITEMS.get(), List.copyOf(newList));
             return result;

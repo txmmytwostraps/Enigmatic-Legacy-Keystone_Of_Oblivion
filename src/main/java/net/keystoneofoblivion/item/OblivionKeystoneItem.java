@@ -6,19 +6,19 @@ import net.keystoneofoblivion.ModItems;
 import net.keystoneofoblivion.ModSounds;
 import net.keystoneofoblivion.client.KeystoneClientHooks;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.NonNullList;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -27,8 +27,10 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,6 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.Consumer;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -48,7 +51,7 @@ public class OblivionKeystoneItem extends Item {
         super(props);
     }
 
-    private static List<ResourceLocation> boundItems(ItemStack stack) {
+    private static List<Identifier> boundItems(ItemStack stack) {
         return stack.getOrDefault(ModDataComponents.BOUND_ITEMS.get(), List.of());
     }
 
@@ -61,51 +64,53 @@ public class OblivionKeystoneItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> list, @NotNull TooltipFlag flag) {
-        if (Screen.hasShiftDown()) {
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone1");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone2");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone3");
-            addLore(list, "tooltip.keystone_of_oblivion.void");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone4");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone5");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone6");
-            addLore(list, "tooltip.keystone_of_oblivion.void");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone7");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone8");
-            addLore(list, "tooltip.keystone_of_oblivion.void");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone9");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone10");
-            addLore(list, "tooltip.keystone_of_oblivion.void");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone11");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone12");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone13");
-            addLore(list, "tooltip.keystone_of_oblivion.void");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone14");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone15");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStone16");
-        } else if (Screen.hasControlDown()) {
-            addLore(list, "tooltip.keystone_of_oblivion.voidStoneCtrlList");
+    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context,
+                                 @NotNull TooltipDisplay tooltipDisplay, @NotNull Consumer<Component> tooltipAdder,
+                                 @NotNull TooltipFlag flag) {
+        if (flag.hasShiftDown()) {
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone1");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone2");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone3");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.void");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone4");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone5");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone6");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.void");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone7");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone8");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.void");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone9");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone10");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.void");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone11");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone12");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone13");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.void");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone14");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone15");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStone16");
+        } else if (flag.hasControlDown()) {
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStoneCtrlList");
 
-            List<ResourceLocation> bound = boundItems(stack);
+            List<Identifier> bound = boundItems(stack);
             int softcap = Config.SOFTCAP.get();
 
             if (bound.size() <= softcap) {
-                for (ResourceLocation id : bound) {
-                    appendBoundLine(list, id);
+                for (Identifier id : bound) {
+                    appendBoundLine(tooltipAdder, id);
                 }
             } else {
                 for (int i = 0; i < softcap; i++) {
-                    ResourceLocation random = bound.get(RANDOM.nextInt(bound.size()));
-                    appendBoundLine(list, random);
+                    Identifier random = bound.get(RANDOM.nextInt(bound.size()));
+                    appendBoundLine(tooltipAdder, random);
                 }
             }
         } else {
-            addLore(list, "tooltip.keystone_of_oblivion.holdShift");
-            addLore(list, "tooltip.keystone_of_oblivion.voidStoneHoldCtrl");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.holdShift");
+            addLore(tooltipAdder, "tooltip.keystone_of_oblivion.voidStoneHoldCtrl");
         }
 
-        addLore(list, "tooltip.keystone_of_oblivion.void");
+        addLore(tooltipAdder, "tooltip.keystone_of_oblivion.void");
 
         MutableComponent mode;
         if (isActive(stack)) {
@@ -113,22 +118,22 @@ public class OblivionKeystoneItem extends Item {
         } else {
             mode = Component.translatable("tooltip.keystone_of_oblivion.voidStoneModeInactive");
         }
-        list.add(Component.translatable("tooltip.keystone_of_oblivion.voidStoneModeDesc", mode.getString()));
+        tooltipAdder.accept(Component.translatable("tooltip.keystone_of_oblivion.voidStoneModeDesc", mode.getString()));
     }
 
-    private static void addLore(List<Component> list, String key) {
-        list.add(Component.translatable(key));
+    private static void addLore(Consumer<Component> adder, String key) {
+        adder.accept(Component.translatable(key));
     }
 
-    private static Item resolveItem(ResourceLocation id) {
+    private static Item resolveItem(Identifier id) {
         return BuiltInRegistries.ITEM.get(id).map(Holder::value).orElse(net.minecraft.world.item.Items.AIR);
     }
 
-    private static void appendBoundLine(List<Component> list, ResourceLocation id) {
+    private static void appendBoundLine(Consumer<Component> adder, Identifier id) {
         Item item = resolveItem(id);
         if (item != net.minecraft.world.item.Items.AIR) {
             ItemStack displayStack = new ItemStack(item);
-            list.add(Component.literal(" - " + displayStack.getHoverName().getString()).withStyle(ChatFormatting.GOLD));
+            adder.accept(Component.literal(" - " + displayStack.getHoverName().getString()).withStyle(ChatFormatting.GOLD));
         }
     }
 
@@ -138,7 +143,7 @@ public class OblivionKeystoneItem extends Item {
             return false;
         }
         other.setCount(0);
-        if (player.level().isClientSide) {
+        if (player.level().isClientSide()) {
             player.level().playSound(player, player.blockPosition(), SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS,
                     0.25F, 1.2F + (float) Math.random() * 0.4F);
         }
@@ -151,7 +156,7 @@ public class OblivionKeystoneItem extends Item {
             return false;
         }
         slot.set(ItemStack.EMPTY);
-        if (player.level().isClientSide) {
+        if (player.level().isClientSide()) {
             player.level().playSound(player, player.blockPosition(), SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS,
                     0.25F, 1.2F + (float) Math.random() * 0.4F);
         }
@@ -179,7 +184,7 @@ public class OblivionKeystoneItem extends Item {
                     1.0F, (float) (0.8F + (Math.random() * 0.2F)));
         }
 
-        if (world.isClientSide) {
+        if (world.isClientSide()) {
             KeystoneClientHooks.showModeOverlay(buildModeLine(stack));
         }
 
@@ -195,27 +200,28 @@ public class OblivionKeystoneItem extends Item {
     }
 
     @Override
-    public void inventoryTick(@NotNull ItemStack stack, @NotNull Level world, @NotNull Entity entity, int itemSlot, boolean isSelected) {
+    public void inventoryTick(@NotNull ItemStack stack, @NotNull ServerLevel level, @NotNull Entity entity, @Nullable EquipmentSlot equipmentSlot) {
         if (!(entity instanceof Player player) || entity.tickCount % 4 != 0) {
             return;
         }
         if (!isActive(stack)) {
             return;
         }
-        List<ResourceLocation> bound = boundItems(stack);
+        List<Identifier> bound = boundItems(stack);
         if (bound.isEmpty()) {
             return;
         }
         consumeStuff(player, bound, consumptionMode(stack));
     }
 
-    public static void consumeStuff(Player player, List<ResourceLocation> list, int mode) {
+    public static void consumeStuff(Player player, List<Identifier> list, int mode) {
         Inventory inv = player.getInventory();
+        int mainSize = inv.getNonEquipmentItems().size();
         Map<Integer, ItemStack> stackMap = new HashMap<>();
         int filledStacks = 0;
 
-        for (int slot = 0; slot < inv.items.size(); slot++) {
-            ItemStack s = inv.items.get(slot);
+        for (int slot = 0; slot < mainSize; slot++) {
+            ItemStack s = inv.getItem(slot);
             if (!s.isEmpty()) {
                 filledStacks += 1;
                 if (s.getItem() != ModItems.OBLIVION_KEYSTONE.get()) {
@@ -229,7 +235,7 @@ public class OblivionKeystoneItem extends Item {
         }
 
         if (mode == 0) {
-            for (ResourceLocation rl : list) {
+            for (Identifier rl : list) {
                 Item bound = resolveItem(rl);
                 for (int slot : stackMap.keySet()) {
                     if (stackMap.get(slot).getItem() == bound) {
@@ -238,7 +244,7 @@ public class OblivionKeystoneItem extends Item {
                 }
             }
         } else if (mode == 1) {
-            for (ResourceLocation rl : list) {
+            for (Identifier rl : list) {
                 Item bound = resolveItem(rl);
                 Map<Integer, ItemStack> localStackMap = new HashMap<>(stackMap);
                 Multimap<Integer, Integer> stackSizeMultimap = ArrayListMultimap.create();
@@ -249,7 +255,7 @@ public class OblivionKeystoneItem extends Item {
                     stackSizeMultimap.put(localStackMap.get(slot).getCount(), slot);
                 }
 
-                int keepCount = (inv.offhand.get(0).getItem() == bound) ? 0 : 1;
+                int keepCount = (inv.getItem(Inventory.SLOT_OFFHAND).getItem() == bound) ? 0 : 1;
 
                 while (localStackMap.size() > keepCount) {
                     int smallestStackSize = Collections.min(stackSizeMultimap.keySet());
@@ -262,8 +268,8 @@ public class OblivionKeystoneItem extends Item {
                 }
             }
         } else if (mode == 2) {
-            if (filledStacks >= inv.items.size()) {
-                for (ResourceLocation rl : list) {
+            if (filledStacks >= mainSize) {
+                for (Identifier rl : list) {
                     Item bound = resolveItem(rl);
                     Map<Integer, ItemStack> localStackMap = new HashMap<>(stackMap);
                     Multimap<Integer, Integer> stackSizeMultimap = ArrayListMultimap.create();

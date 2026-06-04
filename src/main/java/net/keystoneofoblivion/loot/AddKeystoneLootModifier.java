@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.keystoneofoblivion.ModItems;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -22,12 +22,12 @@ public class AddKeystoneLootModifier extends LootModifier {
                             .forGetter(m -> m.chancePercent))
                     .apply(inst, AddKeystoneLootModifier::new));
 
-    private static final Set<ResourceLocation> TARGET_TABLES = Set.of(
-            ResourceLocation.fromNamespaceAndPath("minecraft", "chests/nether_bridge"),
-            ResourceLocation.fromNamespaceAndPath("minecraft", "chests/bastion_treasure"),
-            ResourceLocation.fromNamespaceAndPath("minecraft", "chests/bastion_hoglin_stable"),
-            ResourceLocation.fromNamespaceAndPath("minecraft", "chests/bastion_bridge"),
-            ResourceLocation.fromNamespaceAndPath("minecraft", "chests/bastion_other")
+    private static final Set<Identifier> TARGET_TABLES = Set.of(
+            Identifier.fromNamespaceAndPath("minecraft", "chests/nether_bridge"),
+            Identifier.fromNamespaceAndPath("minecraft", "chests/bastion_treasure"),
+            Identifier.fromNamespaceAndPath("minecraft", "chests/bastion_hoglin_stable"),
+            Identifier.fromNamespaceAndPath("minecraft", "chests/bastion_bridge"),
+            Identifier.fromNamespaceAndPath("minecraft", "chests/bastion_other")
     );
 
     private final int chancePercent;
@@ -39,7 +39,7 @@ public class AddKeystoneLootModifier extends LootModifier {
 
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        ResourceLocation tableId = context.getQueriedLootTableId();
+        Identifier tableId = context.getQueriedLootTableId();
         if (TARGET_TABLES.contains(tableId) && context.getRandom().nextInt(100) < chancePercent) {
             generatedLoot.add(new ItemStack(ModItems.OBLIVION_KEYSTONE.get()));
         }
