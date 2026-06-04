@@ -33,6 +33,7 @@ As required by **Section IV.3** of the license, the following modifications have
 - **Added:** active-state enchantment glint on the item.
 - **Added:** an on-screen popup when switching modes.
 - **Added:** a configurable hard cap (default value: **250**).
+- **Fixed (1.0.1):** shift+right-click toggle now works while flying. The original used `isCrouching()` which returns false in creative flight; this port uses `isShiftKeyDown()` so the toggle activates anywhere shift is held.
 
 > Any further changes, fixes, or deviations from the original will be documented in this section as they are made.
 

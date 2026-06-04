@@ -159,7 +159,7 @@ public class OblivionKeystoneItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
         int mode = consumptionMode(stack);
 
-        if (player.isCrouching()) {
+        if (player.isShiftKeyDown()) {
             boolean newActive = !isActive(stack);
             stack.set(ModDataComponents.ACTIVE.get(), newActive);
             stack.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, newActive);
