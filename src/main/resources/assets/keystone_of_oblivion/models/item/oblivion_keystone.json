@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "keystone_of_oblivion:item/oblivion_keystone"
+  }
+}

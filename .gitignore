@@ -1,0 +1,42 @@
+### Gradle / NeoForge ###
+.gradle/
+build/
+run/
+runs/
+src/generated/
+repo/
+
+### IntelliJ IDEA ###
+.idea/
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+.kotlin
+*.iml
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### Project ###
+_reference/
+
+### Local-only working notes (never published) ###
+CLAUDE.md
+build_log*.txt
+runclient_log*.txt
+.claude/

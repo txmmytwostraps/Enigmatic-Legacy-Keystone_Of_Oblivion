@@ -1,0 +1,31 @@
+{
+  "item.keystone_of_oblivion.oblivion_keystone": "Keystone of The Oblivion",
+
+  "itemGroup.keystone_of_oblivion": "Enigmatic Legacy: Keystone",
+
+  "tooltip.keystone_of_oblivion.void": " ",
+  "tooltip.keystone_of_oblivion.holdShift": "§5Hold §6Shift§5 to see details.",
+  "tooltip.keystone_of_oblivion.voidStoneHoldCtrl": "§5Hold §6Ctrl§5 to see consumable items.",
+  "tooltip.keystone_of_oblivion.voidStoneCtrlList": "§5List of consumable items:",
+  "tooltip.keystone_of_oblivion.voidStone1": "§5While in inventory, §6Right-Clicking§5 it while dragging",
+  "tooltip.keystone_of_oblivion.voidStone2": "§5another stack, or while dragging the keystone",
+  "tooltip.keystone_of_oblivion.voidStone3": "§5over another stack will destroy that stack.",
+  "tooltip.keystone_of_oblivion.voidStone4": "§5Combine with any item in crafting grid to let it",
+  "tooltip.keystone_of_oblivion.voidStone5": "§5automatically consume that item while in inventory,",
+  "tooltip.keystone_of_oblivion.voidStone6": "§5or with nothing to clear the list.",
+  "tooltip.keystone_of_oblivion.voidStone7": "§5While holding, press §6Right-Click§5 to switch modes,",
+  "tooltip.keystone_of_oblivion.voidStone8": "§5or §6Shift§5+§6Right-Click§5 to activate or deactivate it.",
+  "tooltip.keystone_of_oblivion.voidStone9": "§5In §6Total Absorption§5 mode, keystone consumes all",
+  "tooltip.keystone_of_oblivion.voidStone10": "§5listed items within your inventory, until none left.",
+  "tooltip.keystone_of_oblivion.voidStone11": "§5In §6Last Stack§5 mode, it will always leave one stack",
+  "tooltip.keystone_of_oblivion.voidStone12": "§5of each type of item, but will consume anything",
+  "tooltip.keystone_of_oblivion.voidStone13": "§5more than that.",
+  "tooltip.keystone_of_oblivion.voidStone14": "§5In §6Excess Absorption§5 mode, it will only consume",
+  "tooltip.keystone_of_oblivion.voidStone15": "§5anything if you have no free space in your",
+  "tooltip.keystone_of_oblivion.voidStone16": "§5inventory, and only until it appears.",
+  "tooltip.keystone_of_oblivion.voidStoneModeDesc": "§dMode: §6%1$s",
+  "tooltip.keystone_of_oblivion.voidStoneMode0": "§6Total Absorption",
+  "tooltip.keystone_of_oblivion.voidStoneMode1": "§6Last Stack",
+  "tooltip.keystone_of_oblivion.voidStoneMode2": "§6Excess Absorption",
+  "tooltip.keystone_of_oblivion.voidStoneModeInactive": "§6Deactivated"
+}

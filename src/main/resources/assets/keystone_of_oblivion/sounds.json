@@ -1,0 +1,18 @@
+{
+  "keystone_activate": {
+    "sounds": [
+      {
+        "name": "keystone_of_oblivion:keystone_activate",
+        "stream": false
+      }
+    ]
+  },
+  "keystone_deactivate": {
+    "sounds": [
+      {
+        "name": "keystone_of_oblivion:keystone_deactivate",
+        "stream": false
+      }
+    ]
+  }
+}
