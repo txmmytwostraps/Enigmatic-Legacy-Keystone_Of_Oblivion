@@ -16,7 +16,7 @@ base {
 }
 
 tasks.named('jar', Jar) {
-    archiveFileName = "Enigmatic Legacy Keystone ${mod_version}.jar"
+    archiveFileName = "Enigmatic Legacy Keystone ${mod_version} [NeoForge ${minecraft_version}].jar"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)

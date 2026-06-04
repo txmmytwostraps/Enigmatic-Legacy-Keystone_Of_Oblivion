@@ -1,5 +1,5 @@
 {
   "type": "keystone_of_oblivion:add_keystone",
   "conditions": [],
-  "chance_percent": 20
+  "chance_percent": 5
 }
