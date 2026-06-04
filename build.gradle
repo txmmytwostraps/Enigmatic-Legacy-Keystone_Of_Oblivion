@@ -57,6 +57,19 @@ neoForge {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+repositories {
+    maven {
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+}
+
+dependencies {
+    // JEI is a runtime-only dev convenience for inspecting recipes in-game.
+    // Not bundled in the published jar; end users install JEI themselves if they want it.
+    runtimeOnly "mezz.jei:jei-1.21.1-neoforge:19.21.2.313"
+}
+
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [
             minecraft_version      : minecraft_version,

@@ -15,6 +15,7 @@ public final class KeystoneOfOblivion {
         ModSounds.SOUNDS.register(modBus);
         ModRecipeSerializers.RECIPE_SERIALIZERS.register(modBus);
         ModCreativeTabs.CREATIVE_MODE_TABS.register(modBus);
+        ModLootModifiers.LOOT_MODIFIERS.register(modBus);
 
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }

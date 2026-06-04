@@ -34,6 +34,8 @@ As required by **Section IV.3** of the license, the following modifications have
 - **Added:** an on-screen popup when switching modes.
 - **Added:** a configurable hard cap (default value: **250**).
 - **Fixed (1.0.1):** shift+right-click toggle now works while flying. The original used `isCrouching()` which returns false in creative flight; this port uses `isShiftKeyDown()` so the toggle activates anywhere shift is held.
+- **Added (1.0.2):** a crafting recipe — 8 obsidian around 1 ender pearl (3×3 shaped) → 1 keystone. The original mod had no crafting recipe (loot-only). Added because survival players need a reliable way to obtain it.
+- **Added (1.0.2):** the keystone is also added to Nether Fortress and Bastion Remnant loot chests (~5% chance per chest), preserving the original's "found in Nether dungeons" feel.
 
 > Any further changes, fixes, or deviations from the original will be documented in this section as they are made.
 
