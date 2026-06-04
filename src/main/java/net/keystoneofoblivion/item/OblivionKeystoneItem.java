@@ -15,9 +15,9 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Inventory;
@@ -120,9 +120,13 @@ public class OblivionKeystoneItem extends Item {
         list.add(Component.translatable(key));
     }
 
+    private static Item resolveItem(ResourceLocation id) {
+        return BuiltInRegistries.ITEM.get(id).map(Holder::value).orElse(net.minecraft.world.item.Items.AIR);
+    }
+
     private static void appendBoundLine(List<Component> list, ResourceLocation id) {
-        Item item = BuiltInRegistries.ITEM.get(id);
-        if (item != null && item != net.minecraft.world.item.Items.AIR) {
+        Item item = resolveItem(id);
+        if (item != net.minecraft.world.item.Items.AIR) {
             ItemStack displayStack = new ItemStack(item);
             list.add(Component.literal(" - " + displayStack.getHoverName().getString()).withStyle(ChatFormatting.GOLD));
         }
@@ -155,7 +159,7 @@ public class OblivionKeystoneItem extends Item {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level world, Player player, @NotNull InteractionHand hand) {
+    public @NotNull InteractionResult use(@NotNull Level world, Player player, @NotNull InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         int mode = consumptionMode(stack);
 
@@ -180,7 +184,7 @@ public class OblivionKeystoneItem extends Item {
         }
 
         player.swing(hand);
-        return new InteractionResultHolder<>(InteractionResult.SUCCESS, stack);
+        return InteractionResult.SUCCESS;
     }
 
     private static Component buildModeLine(ItemStack stack) {
@@ -226,7 +230,7 @@ public class OblivionKeystoneItem extends Item {
 
         if (mode == 0) {
             for (ResourceLocation rl : list) {
-                Item bound = BuiltInRegistries.ITEM.get(rl);
+                Item bound = resolveItem(rl);
                 for (int slot : stackMap.keySet()) {
                     if (stackMap.get(slot).getItem() == bound) {
                         inv.setItem(slot, ItemStack.EMPTY);
@@ -235,7 +239,7 @@ public class OblivionKeystoneItem extends Item {
             }
         } else if (mode == 1) {
             for (ResourceLocation rl : list) {
-                Item bound = BuiltInRegistries.ITEM.get(rl);
+                Item bound = resolveItem(rl);
                 Map<Integer, ItemStack> localStackMap = new HashMap<>(stackMap);
                 Multimap<Integer, Integer> stackSizeMultimap = ArrayListMultimap.create();
 
@@ -260,7 +264,7 @@ public class OblivionKeystoneItem extends Item {
         } else if (mode == 2) {
             if (filledStacks >= inv.items.size()) {
                 for (ResourceLocation rl : list) {
-                    Item bound = BuiltInRegistries.ITEM.get(rl);
+                    Item bound = resolveItem(rl);
                     Map<Integer, ItemStack> localStackMap = new HashMap<>(stackMap);
                     Multimap<Integer, Integer> stackSizeMultimap = ArrayListMultimap.create();
 

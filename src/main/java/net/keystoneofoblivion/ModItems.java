@@ -2,7 +2,6 @@ package net.keystoneofoblivion;
 
 import net.keystoneofoblivion.item.OblivionKeystoneItem;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -12,9 +11,9 @@ import java.util.List;
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(KeystoneOfOblivion.MODID);
 
-    public static final DeferredItem<OblivionKeystoneItem> OBLIVION_KEYSTONE = ITEMS.register(
+    public static final DeferredItem<OblivionKeystoneItem> OBLIVION_KEYSTONE = ITEMS.registerItem(
             "oblivion_keystone",
-            () -> new OblivionKeystoneItem(new Item.Properties()
+            props -> new OblivionKeystoneItem(props
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
                     .fireResistant()

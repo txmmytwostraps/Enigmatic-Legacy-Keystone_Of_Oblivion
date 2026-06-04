@@ -38,5 +38,7 @@ _reference/
 ### Local-only working notes (never published) ###
 CLAUDE.md
 build_log*.txt
+build_*.txt
 runclient_log*.txt
+runclient_*.txt
 .claude/
