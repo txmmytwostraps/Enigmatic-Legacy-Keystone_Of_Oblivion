@@ -1,15 +1,16 @@
 package net.keystoneofoblivion.recipe;
 
+import com.mojang.serialization.MapCodec;
 import net.keystoneofoblivion.Config;
 import net.keystoneofoblivion.ModDataComponents;
 import net.keystoneofoblivion.ModItems;
 import net.keystoneofoblivion.ModRecipeSerializers;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -20,9 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OblivionKeystoneCombineRecipe extends CustomRecipe {
-    public OblivionKeystoneCombineRecipe(CraftingBookCategory category) {
-        super(category);
-    }
+    private static final OblivionKeystoneCombineRecipe INSTANCE = new OblivionKeystoneCombineRecipe();
+    public static final MapCodec<OblivionKeystoneCombineRecipe> CODEC = MapCodec.unit(INSTANCE);
+    public static final StreamCodec<RegistryFriendlyByteBuf, OblivionKeystoneCombineRecipe> STREAM_CODEC =
+            StreamCodec.unit(INSTANCE);
+
+    public OblivionKeystoneCombineRecipe() {}
 
     @Override
     public boolean matches(CraftingInput input, @NotNull Level level) {
@@ -53,7 +57,7 @@ public class OblivionKeystoneCombineRecipe extends CustomRecipe {
     }
 
     @Override
-    public @NotNull ItemStack assemble(CraftingInput input, HolderLookup.@NotNull Provider registries) {
+    public @NotNull ItemStack assemble(CraftingInput input) {
         List<ItemStack> nonKeystone = new ArrayList<>();
         ItemStack keystone = ItemStack.EMPTY;
 

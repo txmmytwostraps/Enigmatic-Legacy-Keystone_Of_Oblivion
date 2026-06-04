@@ -1,5 +1,6 @@
 package net.keystoneofoblivion.loot;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -16,8 +17,8 @@ import java.util.Set;
 
 public class AddKeystoneLootModifier extends LootModifier {
     public static final MapCodec<AddKeystoneLootModifier> CODEC = RecordCodecBuilder.mapCodec(inst ->
-            LootModifier.codecStart(inst)
-                    .and(com.mojang.serialization.Codec.intRange(0, 100)
+            codecStart(inst)
+                    .and(Codec.intRange(0, 100)
                             .fieldOf("chance_percent")
                             .forGetter(m -> m.chancePercent))
                     .apply(inst, AddKeystoneLootModifier::new));
@@ -32,8 +33,8 @@ public class AddKeystoneLootModifier extends LootModifier {
 
     private final int chancePercent;
 
-    public AddKeystoneLootModifier(LootItemCondition[] conditions, int chancePercent) {
-        super(conditions);
+    public AddKeystoneLootModifier(LootItemCondition[] conditions, int priority, int chancePercent) {
+        super(conditions, priority);
         this.chancePercent = chancePercent;
     }
 
