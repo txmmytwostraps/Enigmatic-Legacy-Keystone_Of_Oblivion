@@ -1,5 +1,8 @@
 package net.keystoneofoblivion;
 
+import net.keystoneofoblivion.item.DislocationRing;
+import net.keystoneofoblivion.item.IronRing;
+import net.keystoneofoblivion.item.MagnetRing;
 import net.keystoneofoblivion.item.OblivionKeystoneItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Item;
@@ -22,6 +25,18 @@ public final class ModItems {
                     .component(ModDataComponents.CONSUMPTION_MODE.get(), 0)
                     .component(ModDataComponents.ACTIVE.get(), true)
                     .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
+    public static final DeferredItem<IronRing> IRON_RING = ITEMS.register(
+            "iron_ring",
+            () -> new IronRing(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<MagnetRing> MAGNET_RING = ITEMS.register(
+            "magnet_ring",
+            () -> new MagnetRing(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+
+    public static final DeferredItem<DislocationRing> DISLOCATION_RING = ITEMS.register(
+            "dislocation_ring",
+            () -> new DislocationRing(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
 
     private ModItems() {}
 }

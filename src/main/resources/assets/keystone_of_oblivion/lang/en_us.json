@@ -1,5 +1,8 @@
 {
   "item.keystone_of_oblivion.oblivion_keystone": "Keystone of The Oblivion",
+  "item.keystone_of_oblivion.iron_ring": "Iron Ring",
+  "item.keystone_of_oblivion.magnet_ring": "Magnetic Ring",
+  "item.keystone_of_oblivion.dislocation_ring": "Dislocation Ring",
 
   "itemGroup.keystone_of_oblivion": "Enigmatic Legacy: Keystone",
 
@@ -27,5 +30,11 @@
   "tooltip.keystone_of_oblivion.voidStoneMode0": "§6Total Absorption",
   "tooltip.keystone_of_oblivion.voidStoneMode1": "§6Last Stack",
   "tooltip.keystone_of_oblivion.voidStoneMode2": "§6Excess Absorption",
-  "tooltip.keystone_of_oblivion.voidStoneModeInactive": "§6Deactivated"
+  "tooltip.keystone_of_oblivion.voidStoneModeInactive": "§6Deactivated",
+
+  "tooltip.keystone_of_oblivion.magnetRing1": "§5Attracts items within §6%1$s§6 blocks§5 radius.",
+  "tooltip.keystone_of_oblivion.magnetRing2": "§5This can be disabled by holding §6Shift§5.",
+  "tooltip.keystone_of_oblivion.dislocationRing1": "§5Instantly collects any dropped items",
+  "tooltip.keystone_of_oblivion.dislocationRing2": "§5within §6%1$s§6 blocks§5 radius.",
+  "tooltip.keystone_of_oblivion.dislocationRing3": "§5This can be disabled by holding §6Shift§5."
 }

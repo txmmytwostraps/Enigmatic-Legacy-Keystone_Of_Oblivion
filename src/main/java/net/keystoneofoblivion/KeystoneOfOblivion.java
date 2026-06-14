@@ -11,6 +11,7 @@ public final class KeystoneOfOblivion {
 
     public KeystoneOfOblivion(IEventBus modBus, ModContainer container) {
         ModDataComponents.COMPONENTS.register(modBus);
+        ModAttachments.ATTACHMENT_TYPES.register(modBus);
         ModItems.ITEMS.register(modBus);
         ModSounds.SOUNDS.register(modBus);
         ModRecipeSerializers.RECIPE_SERIALIZERS.register(modBus);

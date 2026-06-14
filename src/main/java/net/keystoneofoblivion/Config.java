@@ -6,6 +6,8 @@ public final class Config {
     public static final ModConfigSpec SPEC;
     public static final ModConfigSpec.IntValue SOFTCAP;
     public static final ModConfigSpec.IntValue HARDCAP;
+    public static final ModConfigSpec.DoubleValue MAGNET_RANGE;
+    public static final ModConfigSpec.DoubleValue DISLOCATION_RANGE;
 
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
@@ -21,6 +23,14 @@ public final class Config {
                         "ridiculously large lists.")
                 .defineInRange("hardcap", 250, 1, Integer.MAX_VALUE);
         b.pop();
+
+        b.push("MagnetRings");
+        MAGNET_RANGE = b.comment("The radius, in blocks, in which the Magnetic Ring attracts items.")
+                .defineInRange("magnetRange", 8.0, 1.0, 256.0);
+        DISLOCATION_RANGE = b.comment("The radius, in blocks, in which the Dislocation Ring collects items.")
+                .defineInRange("dislocationRange", 16.0, 1.0, 256.0);
+        b.pop();
+
         SPEC = b.build();
     }
 

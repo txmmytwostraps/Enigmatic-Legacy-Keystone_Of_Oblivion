@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "E": {
+            "item": "minecraft:ender_eye"
+        },
+        "G": {
+            "item": "minecraft:gold_ingot"
+        },
+        "L": {
+            "item": "minecraft:lapis_lazuli"
+        },
+        "X": {
+            "item": "keystone_of_oblivion:magnet_ring"
+        }
+    },
+    "pattern": [
+        "LEL",
+        "GXG",
+        "LGL"
+    ],
+    "result": {
+        "count": 1,
+        "id": "keystone_of_oblivion:dislocation_ring"
+    }
+}

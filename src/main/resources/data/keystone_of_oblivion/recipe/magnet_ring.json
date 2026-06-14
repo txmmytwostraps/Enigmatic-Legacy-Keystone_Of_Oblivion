@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "D": {
+            "item": "minecraft:diamond"
+        },
+        "G": {
+            "item": "minecraft:gold_ingot"
+        },
+        "I": {
+            "item": "minecraft:iron_ingot"
+        },
+        "R": {
+            "item": "minecraft:redstone"
+        },
+        "X": {
+            "item": "keystone_of_oblivion:iron_ring"
+        }
+    },
+    "pattern": [
+        " D ",
+        "IXG",
+        " R "
+    ],
+    "result": {
+        "count": 1,
+        "id": "keystone_of_oblivion:magnet_ring"
+    }
+}

@@ -17,7 +17,12 @@ public final class ModCreativeTabs {
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.keystone_of_oblivion").withStyle(ChatFormatting.DARK_PURPLE))
                     .icon(() -> new ItemStack(ModItems.OBLIVION_KEYSTONE.get()))
-                    .displayItems((params, output) -> output.accept(ModItems.OBLIVION_KEYSTONE.get()))
+                    .displayItems((params, output) -> {
+                        output.accept(ModItems.OBLIVION_KEYSTONE.get());
+                        output.accept(ModItems.IRON_RING.get());
+                        output.accept(ModItems.MAGNET_RING.get());
+                        output.accept(ModItems.DISLOCATION_RING.get());
+                    })
                     .build());
 
     private ModCreativeTabs() {}

@@ -23,6 +23,8 @@ This port is published **with the creator's permission** and in accordance with 
 
 A port of the **Keystone of the Oblivion** to Minecraft 1.21.1 / NeoForge, recreating the item's original behavior, plus a few small additions (listed below).
 
+It also ports three of Enigmatic Legacy's curio rings — the **Magnetic Ring**, its upgrade the **Dislocation Ring**, and the **Iron Ring** (their crafting base). Because these are Curios items, the mod now **requires the [Curios API](https://www.curseforge.com/minecraft/mc-mods/curios)**.
+
 ---
 
 ## Modifications From the Original
@@ -36,6 +38,9 @@ As required by **Section IV.3** of the license, the following modifications have
 - **Fixed (1.0.1):** shift+right-click toggle now works while flying. The original used `isCrouching()` which returns false in creative flight; this port uses `isShiftKeyDown()` so the toggle activates anywhere shift is held.
 - **Added (1.0.2):** a crafting recipe — 8 obsidian around 1 ender pearl (3×3 shaped) → 1 keystone. The original mod had no crafting recipe (loot-only). Added because survival players need a reliable way to obtain it.
 - **Added (1.0.2):** the keystone is also added to Nether Fortress and Bastion Remnant loot chests (~5% chance per chest), preserving the original's "found in Nether dungeons" feel.
+- **Added (1.0.3):** the **Magnetic Ring**, **Dislocation Ring**, and **Iron Ring**, ported from Enigmatic Legacy as Curios ring items. The Magnetic Ring attracts nearby dropped items toward you (8-block radius); the Dislocation Ring — its upgrade — teleports them straight into your inventory (16-block radius); the Iron Ring grants +1 armor and is the crafting base for the Magnetic Ring. Holding Shift suppresses the pull, and an inventory magnet on/off button toggles it, both as in the original. Radii are configurable.
+- **Added (1.0.3):** crafting recipes for the three rings (Iron Ring from iron ingots + nuggets; Magnetic Ring from the Iron Ring; Dislocation Ring from the Magnetic Ring), matching the unofficial 1.21 port's recipes.
+- **New dependency (1.0.3):** the **Curios API** is now required, since the rings are curio items. The keystone itself is unchanged and works as before.
 
 > Any further changes, fixes, or deviations from the original will be documented in this section as they are made.
 
